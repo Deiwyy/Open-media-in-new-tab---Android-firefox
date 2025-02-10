@@ -1,10 +1,20 @@
 (function() {
+    function injectFontAwesome() {
+        if (document.getElementById("fa-css")) return;
+        
+        let link = document.createElement("link");
+        link.id = "fa-css";
+        link.rel = "stylesheet";
+        link.href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css";
+        document.head.appendChild(link);
+    }
+
     function addOpenButton(video) {
         if (video.dataset.hasButton) return;
         video.dataset.hasButton = true;
 
         let btn = document.createElement("button");
-        btn.innerHTML = '<i class="fa fa-external-link-alt"></i>';
+        btn.innerHTML = '<i class="fa fa-external-link-alt"></i>'; 
         btn.style.position = "absolute";
         btn.style.top = "10px";
         btn.style.right = "10px";
@@ -33,6 +43,7 @@
         document.querySelectorAll("video").forEach(addOpenButton);
     }
 
+    injectFontAwesome();  
     scanForVideos();
     new MutationObserver(scanForVideos).observe(document.body, { childList: true, subtree: true });
 })();
